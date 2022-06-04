@@ -1,0 +1,13 @@
+name: fitest-io-mobile
+channels:
+  - conda-forge
+dependencies:
+  - ca-certificates=2022.5.18.1=h4653dfc_0
+  - icu=70.1=h6b3803e_0
+  - libcxx=14.0.4=h6a5c8ee_0
+  - libuv=1.43.0=h3422bc3_0
+  - libzlib=1.2.12=h90dfc92_0
+  - nodejs=17.9.0=h941bd55_0
+  - openssl=3.0.3=ha287fd2_0
+  - zlib=1.2.12=h90dfc92_0
+prefix: /Users/tfarrell/miniforge3/envs/fitest-io-mobile
