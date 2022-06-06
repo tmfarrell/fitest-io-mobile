@@ -6,7 +6,6 @@ export default StyleSheet.create({
         alignItems: 'center'
     },
     formContainer: {
-        flexDirection: 'row',
         height: 80,
         marginTop: 40,
         marginBottom: 20,
@@ -27,15 +26,37 @@ export default StyleSheet.create({
         flex: 1,
         marginRight: 5
     },
-    button: {
-        height: 47,
+    inputName: {
+        height: 48,
         borderRadius: 5,
-        backgroundColor: '#788eec',
-        width: 80,
-        alignItems: "center",
+        overflow: 'hidden',
+        backgroundColor: 'white',
+        paddingLeft: 16,
+        flex: 1,
+        marginRight: 5,
+        fontWeight: 'bold',
+        fontSize: 16
+    },
+    multilineInput: {
+        height: 240,
+        borderRadius: 5,
+        overflow: 'hidden',
+        backgroundColor: 'white',
+        paddingLeft: 16,
+        flex: 1,
+        marginRight: 5, 
+        fontSize: 16
+    },
+    button: {
+        marginTop: 20,
+        height: 50,
+        borderRadius: 5,
+        backgroundColor: '#ea9999',
+        width: 160,
+        alignItems: 'center',
         justifyContent: 'center'
     },
-    buttonText: {
+    buttonTitle: {
         color: 'white',
         fontSize: 16
     },

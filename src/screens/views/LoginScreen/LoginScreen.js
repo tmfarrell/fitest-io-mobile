@@ -3,47 +3,41 @@ import { Image, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import styles from './styles';
 
-import { firebase_app } from '../../firebase/config'
+import { firebase_app } from '../../../firebase/config'
 
-export default function RegistrationScreen({navigation}) {
-    const [fullName, setFullName] = useState('')
+export default function LoginScreen({navigation}) {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const [confirmPassword, setConfirmPassword] = useState('')
 
     const onFooterLinkPress = () => {
-        navigation.navigate('Login')
+        navigation.navigate('Registration')
     }
 
-    const onRegisterPress = () => {
-        if (password !== confirmPassword) {
-            alert("Passwords don't match.")
-            return
-        }
+    const onLoginPress = () => {
         firebase_app
             .auth()
-            .createUserWithEmailAndPassword(email, password)
+            .signInWithEmailAndPassword(email, password)
             .then((response) => {
                 const uid = response.user.uid
-                const data = {
-                    id: uid,
-                    email,
-                    fullName,
-                };
                 const usersRef = firebase_app.firestore().collection('users')
                 usersRef
                     .doc(uid)
-                    .set(data)
-                    .then(() => {
-                        navigation.navigate('Home', {user: data})
+                    .get()
+                    .then(firestoreDocument => {
+                        if (!firestoreDocument.exists) {
+                            alert("User does not exist anymore.")
+                            return;
+                        }
+                        const user = firestoreDocument.data()
+                        navigation.navigate('Home', { userId: user.id })
                     })
-                    .catch((error) => {
+                    .catch(error => {
                         alert(error)
                     });
             })
-            .catch((error) => {
+            .catch(error => {
                 alert(error)
-        });
+            })
     }
 
     return (
@@ -53,16 +47,7 @@ export default function RegistrationScreen({navigation}) {
                 keyboardShouldPersistTaps="always">
                 <Image
                     style={styles.logo}
-                    source={require('../../../assets/icon.png')}
-                />
-                <TextInput
-                    style={styles.input}
-                    placeholder='Full Name'
-                    placeholderTextColor="#aaaaaa"
-                    onChangeText={(text) => setFullName(text)}
-                    value={fullName}
-                    underlineColorAndroid="transparent"
-                    autoCapitalize="none"
+                    source={require('../../../../assets/icon.png')}
                 />
                 <TextInput
                     style={styles.input}
@@ -83,23 +68,15 @@ export default function RegistrationScreen({navigation}) {
                     underlineColorAndroid="transparent"
                     autoCapitalize="none"
                 />
-                <TextInput
-                    style={styles.input}
-                    placeholderTextColor="#aaaaaa"
-                    secureTextEntry
-                    placeholder='Confirm Password'
-                    onChangeText={(text) => setConfirmPassword(text)}
-                    value={confirmPassword}
-                    underlineColorAndroid="transparent"
-                    autoCapitalize="none"
-                />
                 <TouchableOpacity
                     style={styles.button}
-                    onPress={() => onRegisterPress()}>
-                    <Text style={styles.buttonTitle}>Create account</Text>
+                    onPress={() => onLoginPress()}>
+                    <Text style={styles.buttonTitle}>Log in</Text>
                 </TouchableOpacity>
                 <View style={styles.footerView}>
-                    <Text style={styles.footerText}>Already got an account? <Text onPress={onFooterLinkPress} style={styles.footerLink}>Log in</Text></Text>
+                    <Text style={styles.footerText}>Don't have an account? 
+                        <Text onPress={onFooterLinkPress} style={styles.footerLink}> Sign up</Text>
+                    </Text>
                 </View>
             </KeyboardAwareScrollView>
         </View>
