@@ -3,7 +3,8 @@ import React, { useEffect, useState } from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 
-import { HomeScreen, PostScreen, LoginScreen, RegistrationScreen } from './src/screens'
+import { HomeScreen, LoginScreen, RegistrationScreen } from './src/screens'
+import WorkoutPostDetail from './src/screens/components/WorkoutPostDetail'
 
 import {decode, encode} from 'base-64'
 if (!global.btoa) {  global.btoa = encode }
@@ -51,9 +52,10 @@ export default function App() {
       <Stack.Navigator>
         { user ? (
           <>
-            <Stack.Screen name="Home" component={HomeScreen}
-              initialParams={{ userId: user.id }} />
-            <Stack.Screen name="Post" component={PostScreen} />
+            <Stack.Screen name="HomeScreen" component={HomeScreen}
+              initialParams={{ userId: user.id, userFullName: user.fullName }} 
+              options={{ headerShown: false }} />
+            <Stack.Screen name="Workout" component={WorkoutPostDetail} />
           </>
         ) : (
           <>

@@ -9,10 +9,10 @@ export default function PostScreen({navigation, route }) {
 
     const [entityText, setEntityText] = useState('')
     const [entityName, setEntityName] = useState('')
-    const [entities, setEntities] = useState([])
 
     const entityRef = firebase_app.firestore().collection('entities')
-    const userID = route.params.userId
+    const userId = route.params.userId
+    const userFullName = route.params.userFullName
 
     const onPostPress = () => {
         if (entityText && entityText.length > 0) {
@@ -20,7 +20,8 @@ export default function PostScreen({navigation, route }) {
             const data = {
                 name: entityName,
                 text: entityText,
-                authorID: userID,
+                authorID: userId,
+                authorFullName: userFullName,
                 createdAt: timestamp,
             } ;
             entityRef
@@ -33,7 +34,7 @@ export default function PostScreen({navigation, route }) {
                 .catch((error) => {
                     alert(error)
                 }) ;
-            navigation.navigate('Home', { userId: userID }) ; 
+            navigation.navigate('Home', { userId: userId, userFullName: userFullName }) ; 
         }
     }
 

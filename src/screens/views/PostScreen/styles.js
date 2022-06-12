@@ -35,7 +35,7 @@ export default StyleSheet.create({
         flex: 1,
         marginRight: 5,
         fontWeight: 'bold',
-        fontSize: 16
+        fontSize: 18
     },
     multilineInput: {
         height: 240,
@@ -45,7 +45,7 @@ export default StyleSheet.create({
         paddingLeft: 16,
         flex: 1,
         marginRight: 5, 
-        fontSize: 16
+        fontSize: 18
     },
     button: {
         marginTop: 20,

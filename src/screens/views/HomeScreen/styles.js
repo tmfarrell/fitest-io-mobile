@@ -46,10 +46,12 @@ export default StyleSheet.create({
         padding: 20,
     },
     entityContainer: {
-        marginTop: 16,
+        marginTop: 15,
         borderBottomColor: '#cccccc',
         borderBottomWidth: 1,
-        paddingBottom: 16
+        paddingBottom: 15,
+        paddingLeft: 10,
+        paddingRight: 15
     },
     entityText: {
         fontSize: 20,
@@ -59,5 +61,14 @@ export default StyleSheet.create({
         fontSize: 20,
         color: '#333333',
         fontWeight: 'bold'
+    },
+    entityAuthorName: {
+        fontSize: 18,
+        color: '#db3d3d',
+        fontWeight: 'bold',
+        paddingTop: 10,
+        paddingBottom: 5, 
+        marginLeft: 10,
+        textAlignVertical: 'center'
     }
 })
